@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Hash;
+
+
+use Illuminate\Http\Request;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,3 +28,32 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+})->name('git.auth.redirect');
+
+Route::get('/auth/callback', function (Request $request) {
+
+    // returns user details..
+    $user = Socialite::driver('github')->user();
+    
+    // find user with email else create with email, name, password
+    $user = User::firstOrCreate(
+        [
+            'email' => $user->getEmail()
+        ],
+        [
+            'name' => $user->getName(),
+            'password' => Hash::make('12345678')
+        ]
+    );
+
+    // logins user
+    auth()->login($user);
+
+    // redirect to dashboard
+    return redirect('dashboard');
+    
+});

@@ -46,9 +46,14 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+            </div>
 
-                <x-button class="ml-3">
+            <div class="flex mt-4">
+                <x-button class="mr-3">
                     {{ __('Login') }}
+                </x-button>
+                <x-button>
+                <a href="{{ route('git.auth.redirect') }}">Login via Github</a>
                 </x-button>
             </div>
         </form>
