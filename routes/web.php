@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
-
+// use App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -57,3 +57,6 @@ Route::get('/auth/callback', function (Request $request) {
     return redirect('dashboard');
     
 });
+
+Route::get('/translate', 'App\Http\Controllers\TranslateController@index');
+Route::get('/translateText', 'App\Http\Controllers\TranslateController@translate');
