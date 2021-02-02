@@ -6,6 +6,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Hash;
 // use App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 /*
@@ -58,5 +59,24 @@ Route::get('/auth/callback', function (Request $request) {
     
 });
 
-Route::get('/translate', 'App\Http\Controllers\TranslateController@index');
+Route::get('/translate', 'App\Http\Controllers\TranslateController@index')->middleware('verified');
 Route::get('/translateText', 'App\Http\Controllers\TranslateController@translate');
+
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/dashboard');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
