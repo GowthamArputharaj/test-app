@@ -20,6 +20,12 @@ use App\Models\User;
 |
 */
 //
+
+Route::get('/asdf', function(){
+    dd(getAllLocals());
+    dd("Gowtham");
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
