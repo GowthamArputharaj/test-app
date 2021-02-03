@@ -86,3 +86,10 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+
+
+Route::get('notify', 'App\Http\Controllers\NotificationController@index')->middleware('auth');
+Route::post('send-notification', 'App\Http\Controllers\NotificationController@sendNotification')->name('notify.send')->middleware(['auth']);
+Route::post('read-notification', 'App\Http\Controllers\NotificationController@readNotification')->name('notify.read')->middleware(['auth']);
+
+

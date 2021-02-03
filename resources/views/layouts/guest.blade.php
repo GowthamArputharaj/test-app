@@ -12,11 +12,25 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
+        <div class="text-center mx-5 mt-5">
+            @yield('notifyArea')
+        </div>
+          
+        <div class="font-sans text-gray-900 antialiased m-5">
+            @yield('selectNotify')
+        </div>
+          
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
