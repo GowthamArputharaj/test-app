@@ -92,4 +92,4 @@ Route::get('notify', 'App\Http\Controllers\NotificationController@index')->middl
 Route::post('send-notification', 'App\Http\Controllers\NotificationController@sendNotification')->name('notify.send')->middleware(['auth']);
 Route::post('read-notification', 'App\Http\Controllers\NotificationController@readNotification')->name('notify.read')->middleware(['auth']);
 
-
+Route::get('doThings', 'App\Http\Controllers\TestController@doThings');

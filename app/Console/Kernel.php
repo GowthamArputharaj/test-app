@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Http\Controllers\TestController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // $schedule->command('inspire')->everyMinute()->sendOutputTo(storage_path('queue-work.log'));
+        // $schedule->command('inspire')->everyMinute()->appendOutputTo(storage_path('queue-work.log'));
+        // $schedule->command('gowtham-quotes')->everyMinute()->appendOutputTo(storage_path('gowtham.txt'));
     }
 
     /**
